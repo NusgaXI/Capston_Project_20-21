@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ExcelRenderer } from "react-excel-renderer";
-import MainNavigation from './../components/Navigation/MainNavigation';
+import MainNavigation from '../components/Navigation/MainNavigation';
 import AuthContext from '../context/auth-context';
 import UserList from '../components/Users/UserList/UserList';
 import Modal from '../components/Modal/Modal';

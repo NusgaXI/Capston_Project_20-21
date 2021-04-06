@@ -6,7 +6,6 @@ import SidebarIcon from '../../Photo/Sidebar.png';
 
 function MainNavigation() {
   const [sidebar, setSidebar] = useState(false);
-
   const showSidebar = () => setSidebar(!sidebar);
 
   return (
@@ -88,7 +87,6 @@ function MainNavigation() {
         </ul>
         </nav>
         </React.Fragment>
-
         )}
         </AuthContext.Consumer>
   );

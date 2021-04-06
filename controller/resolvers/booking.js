@@ -17,6 +17,7 @@ module.exports = {
             throw err;
         }
     },
+
     bookTimeslot: async (args, req) => {
         if (!req.isAuth) {
             throw new Error('Unathenticated!');
@@ -34,6 +35,7 @@ module.exports = {
         const result = await booking.save();
         return transformBooking(result);
     },
+    
     cancelBooking: async (args, req) => {
         if (!req.isAuth) {
             throw new Error('Unathenticated!');

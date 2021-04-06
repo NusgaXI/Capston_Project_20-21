@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import MainNavigation from './../components/Navigation/MainNavigation';
+import MainNavigation from '../components/Navigation/MainNavigation';
 import TimeslotList from '../components/Timeslots/TimeslotList/TimeslotList';
 import AuthContext from '../context/auth-context';
 import Modal from '../components/Modal/Modal';
@@ -55,40 +55,17 @@ class TimeslotsPage extends Component {
     var startat = moment(date + "T" + start);
     const endat = moment(date + "T" + end);
     var times = [startat.format()];
-    const fifteenminutes_diff = 900000;
-    const thirtyminutes_diff = 1800000;
-    const hour_diff = 3600000;
+    const minutes_diff = 60000 * duration;
     const diff = endat.diff(startat);
 
-    if (duration === "15MINS") {
-      const fifteenminutes = Math.floor(diff/fifteenminutes_diff);
+    const duration_inminute = Math.floor(diff/minutes_diff);
 
-      for (var i = 0; i < fifteenminutes; i++) {
-        startat = moment(startat).add(15, 'm')
-        times.push(startat.format())
-        this.modalConfirmHandler(times[i], times[i+1])
-      };
-    } 
-
-    if (duration === "30MINS") {
-      const thirtyminutes = Math.floor(diff/thirtyminutes_diff);
-
-      for (var x = 0; x < thirtyminutes; x++) {
-        startat = moment(startat).add(30, 'm')
-        times.push(startat.format())
-        this.modalConfirmHandler(times[x], times[x+1])
-      };
-    } 
-
-    if (duration === "1HR") {
-      const hour = Math.floor(diff/hour_diff);
-
-      for (var y = 0; y < hour; y++) {
-        startat = moment(startat).add(1, 'h')
-        times.push(startat.format())
-        this.modalConfirmHandler(times[y], times[y+1])
-      };
-    } 
+    for (var i = 0; i < duration_inminute; i++) {
+      startat = moment(startat).add(duration, 'm')
+      times.push(startat.format())
+      this.modalConfirmHandler(times[i], times[i+1])
+    };
+    
   };
 
   modalConfirmHandler = (startat, endat) => {
@@ -370,11 +347,9 @@ class TimeslotsPage extends Component {
             </div>
             <div class="flex flex-col">
                 <label class="leading-loose">Duration</label>
-                <select class="pr-4 pl-2 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" ref={this.durationElRef}>
-                  <option value="15MINS">15 minutes</option>
-                  <option value="30MINS">30 minutes</option>
-                  <option value="1HR">1 hours</option>
-                </select>
+                <div class="relative focus-within:text-gray-600 text-gray-400">
+                <input class="w-full rounded border p-2" type="text" placeholder="minutes" name="Duration" ref={this.durationElRef}/>
+                </div>
             </div>
           </form>
         </Modal>

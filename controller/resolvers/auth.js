@@ -8,14 +8,11 @@ module.exports = {
     searchUsers: async ({fullname}) => {
         try {
             const users = await User.findOne({ fullName : fullname }).populate('createdTimeslots');
-
             const timeslotLists = users.createdTimeslots;
   
-
             return timeslotLists.map(timeslotList => {
                 return transformTimeslot(timeslotList);
-            })
-            ;
+            });
             } catch (err) {
                 throw err;
             }
@@ -31,6 +28,7 @@ module.exports = {
             throw err;
         }
     },
+
     createUser: args =>{
         return User.findOne({NetID: args.userInput.NetID}).then(user => {
             if (user) {
@@ -55,6 +53,7 @@ module.exports = {
             throw err;
         });
     },
+
     login: async ({NetId, password}) => {
         const user = await User.findOne({NetID: NetId});
         if (!user) {
@@ -64,7 +63,7 @@ module.exports = {
         if (!isEqual) {
             throw new Error('Password is incorrect!');
         }
-        const token = jwt.sign({userId: user.id, NetId: user.NetID}, 'somesupersecretkey', {expiresIn: '1h'});
+        const token = jwt.sign({userId: user.id, NetId: user.NetID}, 'A163C7189CB78CECCB3F2C18C3439', {expiresIn: '1h'});
         return { userId: user.id, role: user.role, fullName: user.fullName, token: token, tokenExpiration: 1 }
     }
 };

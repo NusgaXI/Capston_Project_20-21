@@ -1,6 +1,6 @@
 const Timeslot = require('../../models/timeslot');
 const User = require('../../models/user');
-const { dateToString } = require('../../helpers/date');
+const { dateToString } = require('../helpers/date');
 
 const timeslots = async timeslotIds =>{
     try{
@@ -12,7 +12,6 @@ const timeslots = async timeslotIds =>{
         throw err;
     }
 };
-
 
 const singleTimeslot = async timeslotId => {
     try {

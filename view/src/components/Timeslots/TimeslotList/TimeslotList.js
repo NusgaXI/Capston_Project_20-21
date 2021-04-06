@@ -56,8 +56,6 @@ return(
                   </table>
             </div>
             </div>
-
-                
 )};
 
 export default timeslotList;

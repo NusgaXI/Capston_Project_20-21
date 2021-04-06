@@ -39,6 +39,7 @@ module.exports = {
             throw err;
         }
     },
+    
     cancelTimeslot: async (args, req) => {
         if (!req.isAuth) {
             throw new Error('Unathenticated!');
